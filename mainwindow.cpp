@@ -6,11 +6,11 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-
-
     ui->tableWidget->insertRow(0);
     ui->tableWidget->setItem(0,0,new QTableWidgetItem(""));
     data = new CGetData();
+    CConfig *conf = new CConfig();
+    listConf = conf->getConfig("./Config.conf");
 }
 
 MainWindow::~MainWindow()
@@ -60,7 +60,7 @@ void MainWindow::on_buttonCalculate_clicked()
 
 void MainWindow::getGraph()
 {
-    QGraphicsScene* scene = new QGraphicsScene(this);
+    scene = new QGraphicsScene(this);
     resultData first, second, begin;
     QPen pen, axis;
     float minHeight(0);
@@ -75,16 +75,12 @@ void MainWindow::getGraph()
         first = data->data.at(i);
         second = data->data.at(i+1);
         scene->addLine( i, - (first.HEIGHT - begin.HEIGHT) * 100, (i + 1), - (second.HEIGHT - begin.HEIGHT) * 100, pen);
-        if(minHeight > first.HEIGHT - begin.HEIGHT)
-            minHeight = first.HEIGHT - begin.HEIGHT;
-        if(first.HEIGHT > second.HEIGHT - begin.HEIGHT)
-            minHeight = second.HEIGHT - begin.HEIGHT;
     }
     for(int i(0); i < data->data.size() - 1; i+=10)
     {
-        scene->addLine( i,  - minHeight * 600 - 4, i,  - minHeight * 600 + 4, axis);
+        scene->addLine( i,   - 4, i,   + 4, axis);
     }
-    scene->addLine(0,  - minHeight * 600, scene->width(),  - minHeight * 600, axis);
+    scene->addLine(0,  0, scene->width(), 0, axis);
 }
 
 void MainWindow::on_buttonSend_clicked()
@@ -92,6 +88,7 @@ void MainWindow::on_buttonSend_clicked()
     CSendSms *sms = new CSendSms();
 
     QString sendingString = this->ui->textEditSms->toPlainText();
+
     if(!listConf.isEmpty())
     {
         if(sendingString.isEmpty())
@@ -114,7 +111,6 @@ void MainWindow::on_buttonSend_clicked()
 
 void MainWindow::on_buttonBrowse_clicked()
 {
-
     confPath = QFileDialog::getOpenFileName(this, tr("Open File"),"/path/to/file/",tr("CONF Files (*.conf)"));
     if(!confPath.isEmpty())
     {
@@ -122,4 +118,9 @@ void MainWindow::on_buttonBrowse_clicked()
         CConfig *conf = new CConfig();
         listConf = conf->getConfig(confPath);
     }
+}
+
+void MainWindow::on_buttonSave_clicked()
+{
+    CImgToPdf *pdfFile = new CImgToPdf(this->scene);
 }

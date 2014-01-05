@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created: Sun 5. Jan 04:54:15 2014
+** Created: Sun 5. Jan 15:18:16 2014
 **      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -27,7 +27,6 @@
 #include <QtGui/QTextBrowser>
 #include <QtGui/QTextEdit>
 #include <QtGui/QToolBar>
-#include <QtGui/QVBoxLayout>
 #include <QtGui/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -41,8 +40,8 @@ public:
     QTableWidget *tableWidget;
     QPushButton *buttonCalculate;
     QWidget *tab_2;
-    QVBoxLayout *verticalLayout;
     QGraphicsView *graphicsView;
+    QPushButton *buttonSave;
     QWidget *tab_3;
     QTextEdit *textEditSms;
     QPushButton *buttonBrowse;
@@ -81,15 +80,12 @@ public:
         tabWidget->addTab(tab, QString());
         tab_2 = new QWidget();
         tab_2->setObjectName(QString::fromUtf8("tab_2"));
-        verticalLayout = new QVBoxLayout(tab_2);
-        verticalLayout->setSpacing(6);
-        verticalLayout->setContentsMargins(11, 11, 11, 11);
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
         graphicsView = new QGraphicsView(tab_2);
         graphicsView->setObjectName(QString::fromUtf8("graphicsView"));
-
-        verticalLayout->addWidget(graphicsView);
-
+        graphicsView->setGeometry(QRect(9, 9, 611, 351));
+        buttonSave = new QPushButton(tab_2);
+        buttonSave->setObjectName(QString::fromUtf8("buttonSave"));
+        buttonSave->setGeometry(QRect(10, 370, 75, 23));
         tabWidget->addTab(tab_2, QString());
         tab_3 = new QWidget();
         tab_3->setObjectName(QString::fromUtf8("tab_3"));
@@ -129,7 +125,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(0);
+        tabWidget->setCurrentIndex(2);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -144,6 +140,7 @@ public:
         ___qtablewidgetitem1->setText(QApplication::translate("MainWindow", "height", 0, QApplication::UnicodeUTF8));
         buttonCalculate->setText(QApplication::translate("MainWindow", "Calculate", 0, QApplication::UnicodeUTF8));
         tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("MainWindow", "Paramters", 0, QApplication::UnicodeUTF8));
+        buttonSave->setText(QApplication::translate("MainWindow", "Save", 0, QApplication::UnicodeUTF8));
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("MainWindow", "Graph", 0, QApplication::UnicodeUTF8));
         buttonBrowse->setText(QApplication::translate("MainWindow", "Browse", 0, QApplication::UnicodeUTF8));
         label->setText(QApplication::translate("MainWindow", "Config file path", 0, QApplication::UnicodeUTF8));

@@ -14,11 +14,13 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     cgetdata.cpp \
     csendsms.cpp \
-    cconfig.cpp
+    cconfig.cpp \
+    cimgtopdf.cpp
 
 HEADERS  += mainwindow.h \
     cgetdata.h \
     csendsms.h \
-    cconfig.h
+    cconfig.h \
+    cimgtopdf.h
 
 FORMS    += mainwindow.ui

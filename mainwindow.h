@@ -7,6 +7,7 @@
 #include "cgetdata.h"
 #include "csendsms.h"
 #include "cconfig.h"
+#include "cimgtopdf.h"
 
 namespace Ui {
 class MainWindow;
@@ -27,11 +28,14 @@ private slots:
 
     void on_buttonBrowse_clicked();
 
+    void on_buttonSave_clicked();
+
 private:
     CGetData *data;
     Ui::MainWindow *ui;
     QString confPath;
     QList<QString> listConf;
+    QGraphicsScene* scene;
     void dataToTable();
     void getGraph();
 
