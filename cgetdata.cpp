@@ -39,28 +39,21 @@ void CGetData::singleState(std::string yr, std::string mo, std::string dy,
 void CGetData::parseData(std::string stringData)
 {
     std::string line;
+    int i(0);
     std::istringstream linestream(stringData);
-       /*while(getline(stringData, line))
-       {
-           std::stringstream   linestream(line);
-           getline(linestream, yr, ' ');
-           getline(linestream, mo, ' ');
-           getline(linestream, dy, ' ');
-           getline(linestream, hr, ' ');
-           getline(linestream, mn, ' ');
-           getline(linestream, s, ' ');
-           getline(linestream, HEIGHT, '\n');
-           dataToTable(yr, mo, dy, hr, mn,  s, HEIGHT);
-       }*/
-    std::getline(linestream, line);
-    std::getline(linestream, line);
-    while(std::getline(linestream, line))
+
+    while(i++ != 3)
+    {
+        std::getline(linestream, line);
+    }
+
+    do
     {
          QRegExp rx("(\\ |\\n)");
          QStringList query = QString(line.c_str()).split(rx);
          singleState(query.at(0).toStdString(), query.at(1).toStdString(), query.at(2).toStdString(),
                      query.at(3).toStdString(), query.at(4).toStdString(), query.at(5).toStdString(),
                      query.at(7).toStdString());
-    }
+    }while(std::getline(linestream, line));
 }
 

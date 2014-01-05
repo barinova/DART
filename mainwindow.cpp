@@ -6,6 +6,10 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+
+    ui->tableWidget->insertRow(0);
+    ui->tableWidget->setItem(0,0,new QTableWidgetItem(""));
     data = new CGetData();
 }
 
@@ -25,10 +29,23 @@ void MainWindow::getData(QNetworkReply *reply)
 
 void MainWindow::dataToTable()
 {
+    resultData param = data->data.at(0);
+    QString prev, curr;
+
+    curr = QString(param.time.toString());
+    if(!ui->tableWidget->item(0,0)->text().isEmpty())
+    {
+        prev = ui->tableWidget->item(0,0)->text();
+    }
+
+    if(QString::compare(prev, curr) || prev.isEmpty())
+    {
+        on_buttonSend_clicked();
+    }
     ui->tableWidget->clearContents();
     for(int i(0); i < data->data.size(); i++)
     {
-        resultData param = data->data.at(i);
+        param = data->data.at(i);
         if(i > ui->tableWidget->rowCount() - 1)
         ui->tableWidget->insertRow(i);
         ui->tableWidget->setItem(i,0,new QTableWidgetItem(QString(param.time.toString())));
@@ -68,4 +85,41 @@ void MainWindow::getGraph()
         scene->addLine( i,  - minHeight * 600 - 4, i,  - minHeight * 600 + 4, axis);
     }
     scene->addLine(0,  - minHeight * 600, scene->width(),  - minHeight * 600, axis);
+}
+
+void MainWindow::on_buttonSend_clicked()
+{
+    CSendSms *sms = new CSendSms();
+
+    QString sendingString = this->ui->textEditSms->toPlainText();
+    if(!listConf.isEmpty())
+    {
+        if(sendingString.isEmpty())
+        {
+            sendingString = "DARTs data was updated";
+        }
+        int errorCode = sms->sendSms(listConf.at(1), sendingString, listConf.at(0));
+        ui->textBrowserSms->append("Sending...");
+        if(errorCode == 100)
+        {
+            ui->textBrowserSms->append("Successfully");
+        }
+        else
+        {
+            ui->textBrowserSms->append("Error");
+        }
+        this->ui->textEditSms->clear();
+    }
+}
+
+void MainWindow::on_buttonBrowse_clicked()
+{
+
+    confPath = QFileDialog::getOpenFileName(this, tr("Open File"),"/path/to/file/",tr("CONF Files (*.conf)"));
+    if(!confPath.isEmpty())
+    {
+        ui->lineEditSms->setText(confPath);
+        CConfig *conf = new CConfig();
+        listConf = conf->getConfig(confPath);
+    }
 }

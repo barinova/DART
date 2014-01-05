@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created: Fri 15. Nov 00:06:46 2013
+** Created: Sun 5. Jan 04:54:15 2014
 **      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -16,12 +16,16 @@
 #include <QtGui/QButtonGroup>
 #include <QtGui/QGraphicsView>
 #include <QtGui/QHeaderView>
+#include <QtGui/QLabel>
+#include <QtGui/QLineEdit>
 #include <QtGui/QMainWindow>
 #include <QtGui/QMenuBar>
 #include <QtGui/QPushButton>
 #include <QtGui/QStatusBar>
 #include <QtGui/QTabWidget>
 #include <QtGui/QTableWidget>
+#include <QtGui/QTextBrowser>
+#include <QtGui/QTextEdit>
 #include <QtGui/QToolBar>
 #include <QtGui/QVBoxLayout>
 #include <QtGui/QWidget>
@@ -39,6 +43,13 @@ public:
     QWidget *tab_2;
     QVBoxLayout *verticalLayout;
     QGraphicsView *graphicsView;
+    QWidget *tab_3;
+    QTextEdit *textEditSms;
+    QPushButton *buttonBrowse;
+    QLineEdit *lineEditSms;
+    QLabel *label;
+    QTextBrowser *textBrowserSms;
+    QPushButton *buttonSend;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -80,6 +91,30 @@ public:
         verticalLayout->addWidget(graphicsView);
 
         tabWidget->addTab(tab_2, QString());
+        tab_3 = new QWidget();
+        tab_3->setObjectName(QString::fromUtf8("tab_3"));
+        textEditSms = new QTextEdit(tab_3);
+        textEditSms->setObjectName(QString::fromUtf8("textEditSms"));
+        textEditSms->setGeometry(QRect(10, 210, 231, 41));
+        buttonBrowse = new QPushButton(tab_3);
+        buttonBrowse->setObjectName(QString::fromUtf8("buttonBrowse"));
+        buttonBrowse->setGeometry(QRect(170, 30, 75, 23));
+        lineEditSms = new QLineEdit(tab_3);
+        lineEditSms->setObjectName(QString::fromUtf8("lineEditSms"));
+        lineEditSms->setGeometry(QRect(10, 30, 151, 20));
+        label = new QLabel(tab_3);
+        label->setObjectName(QString::fromUtf8("label"));
+        label->setGeometry(QRect(10, 10, 131, 16));
+        textBrowserSms = new QTextBrowser(tab_3);
+        textBrowserSms->setObjectName(QString::fromUtf8("textBrowserSms"));
+        textBrowserSms->setGeometry(QRect(10, 70, 231, 131));
+        buttonSend = new QPushButton(tab_3);
+        buttonSend->setObjectName(QString::fromUtf8("buttonSend"));
+        buttonSend->setGeometry(QRect(10, 260, 75, 23));
+        QFont font;
+        font.setFamily(QString::fromUtf8("MS Shell Dlg 2"));
+        buttonSend->setFont(font);
+        tabWidget->addTab(tab_3, QString());
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
@@ -110,6 +145,10 @@ public:
         buttonCalculate->setText(QApplication::translate("MainWindow", "Calculate", 0, QApplication::UnicodeUTF8));
         tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("MainWindow", "Paramters", 0, QApplication::UnicodeUTF8));
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("MainWindow", "Graph", 0, QApplication::UnicodeUTF8));
+        buttonBrowse->setText(QApplication::translate("MainWindow", "Browse", 0, QApplication::UnicodeUTF8));
+        label->setText(QApplication::translate("MainWindow", "Config file path", 0, QApplication::UnicodeUTF8));
+        buttonSend->setText(QApplication::translate("MainWindow", "Send", 0, QApplication::UnicodeUTF8));
+        tabWidget->setTabText(tabWidget->indexOf(tab_3), QApplication::translate("MainWindow", "SMS", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };

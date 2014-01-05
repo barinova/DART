@@ -2,8 +2,11 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include "cgetdata.h"
 #include <QGraphicsScene>
+#include <QFileDialog>
+#include "cgetdata.h"
+#include "csendsms.h"
+#include "cconfig.h"
 
 namespace Ui {
 class MainWindow;
@@ -20,9 +23,15 @@ public:
 private slots:
     void on_buttonCalculate_clicked();
     void getData(QNetworkReply *reply);
+    void on_buttonSend_clicked();
+
+    void on_buttonBrowse_clicked();
+
 private:
     CGetData *data;
     Ui::MainWindow *ui;
+    QString confPath;
+    QList<QString> listConf;
     void dataToTable();
     void getGraph();
 

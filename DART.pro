@@ -12,9 +12,13 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    cgetdata.cpp
+    cgetdata.cpp \
+    csendsms.cpp \
+    cconfig.cpp
 
 HEADERS  += mainwindow.h \
-    cgetdata.h
+    cgetdata.h \
+    csendsms.h \
+    cconfig.h
 
 FORMS    += mainwindow.ui
